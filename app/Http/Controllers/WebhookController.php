@@ -31,7 +31,7 @@ class WebhookController extends Controller
 
     private function findRepository()
     {
-        $account    = request('repository')['owner']['nickname'];
+        $account    = request('repository')['owner']['username'];
         $repo       = request('repository')['name'];
         return Repository::where(['account' => $account, 'repo' => $repo])->first();
     }
