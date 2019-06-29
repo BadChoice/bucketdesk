@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use App\ThrustHelpers\Actions\CloseIssues;
 use App\ThrustHelpers\Actions\QuickCreateIssue;
 use App\ThrustHelpers\Fields\IssueLink;
 use App\ThrustHelpers\Fields\PriorityField;
@@ -66,7 +67,9 @@ class Issue extends Resource
 
     public function actions()
     {
-        return [];
+        return [
+            new CloseIssues()
+        ];
     }
 
     public function filters()

@@ -82,6 +82,11 @@ class Issue extends Model
         $this->update(['status' => static::STATUS_RESOLVED]);
     }
 
+    public function close()
+    {
+        $this->update(['status' => static::STATUS_CLOSED]);
+    }
+
     public function comment($comment)
     {
         return app(Bitbucket::class)->createComment($this->repository->account, $this->repository->repo, $this->issue_id, $comment);
