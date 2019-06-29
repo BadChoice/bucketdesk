@@ -124,7 +124,7 @@ class Bitbucket
     private function setAuth($class)
     {
         //$issue->setCredentials($this->auth);
-        $class->getClient()->addListener(
+        $class->getClient()->setApiVersion('2.0')->addListener(
             new \Bitbucket\API\Http\Listener\OAuth2Listener(static::$oauthParameters ?? [
                 'client_id'         => config('services.bitbucket.oauth.key'),
                 'client_secret'     => config('services.bitbucket.oauth.secret'),
