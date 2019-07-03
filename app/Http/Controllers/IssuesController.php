@@ -28,7 +28,7 @@ class IssuesController extends Controller
         return view('issues.show', [
             'issue'    => $issue,
             'remote'   => $issue->getRemote(),
-            'comments' => $issue->getComments(),
+            'comments' => $issue->getComments()->values,
         ]);
     }
 

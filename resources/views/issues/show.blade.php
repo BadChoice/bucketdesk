@@ -6,20 +6,20 @@
     {{ $issue->repository->name }}
     {!! $issue->presenter()->tags !!}
 </div>
-{{--{{ dd($remote) }}--}}
 @include('components.comment', [
-    'avatar' => $remote->reported_by->avatar,
-    'name' => $remote->reported_by->display_name,
-    'date' => Carbon\Carbon::parse($remote->utc_created_on),
+    'avatar' => $remote->reporter->links->avatar->href,
+    'name' => $remote->reporter->display_name,
+    'date' => Carbon\Carbon::parse($remote->created_on),
     'content' => $remote->content,
     'editable' => true,
 ])
 
-@foreach(collect($comments)->sortBy('utc_created_on') as $comment)
+@foreach(collect($comments)->sortBy('created_on') as $comment)
+
     @include('components.comment', [
-        'avatar' => $comment->author_info->avatar,
-        'name' => $comment->author_info->display_name,
-        'date' => Carbon\Carbon::parse($comment->utc_created_on),
+        'avatar' => $comment->user->links->avatar->href,
+        'name' => $comment->user->display_name,
+        'date' => Carbon\Carbon::parse($comment->created_on),
         'content' => $comment->content,
         'editable' => false,
     ])
