@@ -52,11 +52,11 @@ class Issue extends Model
     public function updateBitbucketIssue()
     {
         $this->updateBitbucketWith([
-            'responsible' => $this->username,
-            'title'    => $this->title,
-            'status'   => array_flip(static::statuses())[$this->status],
-            'priority' => array_flip(static::priorities())[$this->priority],
-            'type'     => array_flip(static::types())[$this->type],
+            'responsible'   => $this->username,   // TODO: change by assigne -> Account id
+            'title'         => $this->title,
+            'state'         => array_flip(static::statuses())[$this->status],
+            'priority'      => array_flip(static::priorities())[$this->priority],
+            'type'          => array_flip(static::types())[$this->type],
         ]);
     }
 

@@ -4,7 +4,7 @@
         <span class="bold">{{ $name }}</span> ∞
         <span> {{ $date->timezone('Europe/Madrid')->diffForHumans() }}</span>
         <div class="@if($editable) editable @endif">
-            <p> {!! app('markdown')->convertToHtml($content) !!}</p>
+            <p>{!!$content->html!!}</p>
         </div>
         @if ($editable)
             <a class='link editable pointer fs2' onclick="$('.editable').hide(); $('#new-edit').show()">Edit</a>
@@ -12,7 +12,7 @@
                 <form action="{{route('comments.update', $issue)}}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                    <textarea style="width:600px; height:100px;" name="content">{{$content}}</textarea>
+                    <textarea style="width:600px; height:100px;" name="content">{$content->raw}}</textarea>
                     <br>
                     <button class="secondary">Update Description</button>
                 </form>
