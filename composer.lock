@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11443798cf27957b1be2a782405aa78d",
+    "content-hash": "844d12b833304e80dcfb797144768006",
     "packages": [
         {
             "name": "badchoice/hurricane",
@@ -455,17 +455,11 @@
         },
         {
             "name": "gentle/bitbucket-api",
-            "version": "1.1.2",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/gentlero/bitbucket-api.git",
-                "reference": "178734f8fcbfd569de401d0d65daa3b63a23fa9f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gentlero/bitbucket-api/zipball/178734f8fcbfd569de401d0d65daa3b63a23fa9f",
-                "reference": "178734f8fcbfd569de401d0d65daa3b63a23fa9f",
-                "shasum": ""
+                "url": "git@bitbucket.org:BadChoice/bitbucket-api-fork.git",
+                "reference": "b864369088bc8b0dafd326051d56d9606d63aa86"
             },
             "require": {
                 "jacobkiers/oauth": "~1.0",
@@ -492,7 +486,14 @@
                     "polyfill-55.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "style": [
+                    "php vendor/bin/phpcs --standard=psr2 lib/"
+                ],
+                "test": [
+                    "php vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -510,7 +511,7 @@
                 "api",
                 "bitbucket"
             ],
-            "time": "2018-06-18T05:47:04+00:00"
+            "time": "2019-07-30T14:37:01+00:00"
         },
         {
             "name": "graham-campbell/markdown",
@@ -5866,7 +5867,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "gentle/bitbucket-api": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
