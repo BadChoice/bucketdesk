@@ -12,13 +12,13 @@ class BitbucketTest extends TestCase
     public function can_connect_to_bitbucket()
     {
         $user = new \Bitbucket\API\User();
-        $user->getClient()->addListener(
+        $user->getClient()->setApiVersion('2.0')->addListener(
             new \Bitbucket\API\Http\Listener\BasicAuthListener(config('services.bitbucket.user'), config('services.bitbucket.password'))
         );
 
         // now you can access protected endpoints as $bb_user
         $response = $user->get();
-        $this->assertEquals('BadChoice', json_decode($response->getContent())->user->username);
+        $this->assertEquals('BadChoice', json_decode($response->getContent())->username);
     }
 
     /** @test */
@@ -28,7 +28,7 @@ class BitbucketTest extends TestCase
             'status' => ['open', 'new']
         ]);
 
-        $this->assertTrue(count($issues->issues) > 2);
+        $this->assertTrue(count($issues->values) > 2);
     }
 
     /** @test */
@@ -46,8 +46,8 @@ class BitbucketTest extends TestCase
     /** @test */
     public function can_fetch_a_single_issue()
     {
-        $issue = (new Bitbucket)->update('revo-pos', 'revo-back', 555);
-        $this->assertEquals('eduardda', $issue->responsible->username);
+        $issue = (new Bitbucket)->updateIssue('revo-pos', 'revo-back', 555, ['status' => 'hola']);
+        $this->assertEquals('eduardda', $issue->assignee->nickname);
     }
     
     /** @test */
