@@ -31,19 +31,22 @@ class Issue extends Resource
     public static $defaultOrder = 'desc';
     public static $defaultSort = 'updated_at';
 
+    protected $noEmphasisClass = 'o70';
+
     public function fields()
     {
         return [
-            IssueLink::make('issue_id')->sortable(),
-            TitleField::make('title', 'title')->sortable(),
+            IssueLink::make('issue_id')->sortable()->rowClass($this->noEmphasisClass),
+            TitleField::make('title')->sortable(),
             Tags::make('tags'),
-            BelongsTo::make('repository')->onlyInIndex(),
-            BelongsTo::make('user')->allowNull()->rowClass('date'),
-            PriorityField::make('priority')->sortable()->options(array_flip(\App\Issue::priorities())),
-            TypeField::make('type')->sortable()->options(array_flip(\App\Issue::types())),
-            Select::make('status')->sortable()->options(array_flip(\App\Issue::statuses())),
-            Date::make('date')->sortable()->rowClass('date'),
-            Date::make('created_at')->sortable()->onlyInIndex(),
+            BelongsTo::make('repository')->onlyInIndex()->rowClass($this->noEmphasisClass),
+            BelongsTo::make('user')->allowNull()->rowClass('date')->onlyInEdit(),
+            PriorityField::make('priority')->sortable()->options(array_flip(\App\Issue::priorities()))->rowClass($this->noEmphasisClass),
+            TypeField::make('type')->sortable()->options(array_flip(\App\Issue::types()))->rowClass($this->noEmphasisClass),
+            Select::make('status')->sortable()->options(array_flip(\App\Issue::statuses()))->rowClass($this->noEmphasisClass),
+            Date::make('date')->sortable()->rowClass($this->noEmphasisClass),
+            Date::make('created_at')->sortable()->onlyInIndex()->format('M d')->rowClass($this->noEmphasisClass),
+            Gravatar::make('user.email','')->onlyInIndex()->hideWhen('user', null),
 
             ResolveField::make('id',''),
         ];
