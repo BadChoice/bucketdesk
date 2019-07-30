@@ -38,13 +38,13 @@ class Issue extends Resource
     {
         return [
             IssueLink::make('issue_id')->sortable()->rowClass($this->noEmphasisClass),
+            StatusField::make('status','')->sortable()->options(array_flip(\App\Issue::statuses()))->rowClass('pr2'),
             TitleField::make('title')->sortable(),
             Tags::make('tags'),
             BelongsTo::make('repository')->onlyInIndex()->rowClass($this->noEmphasisClass),
             BelongsTo::make('user')->allowNull()->rowClass('date')->onlyInEdit(),
             PriorityField::make('priority')->sortable()->options(array_flip(\App\Issue::priorities()))->rowClass($this->noEmphasisClass),
             TypeField::make('type')->sortable()->options(array_flip(\App\Issue::types()))->rowClass($this->noEmphasisClass),
-            StatusField::make('status')->sortable()->options(array_flip(\App\Issue::statuses())),
             Date::make('date')->sortable()->rowClass($this->noEmphasisClass),
             Date::make('created_at')->sortable()->onlyInIndex()->format('M d')->rowClass($this->noEmphasisClass),
             Gravatar::make('user.email','')->onlyInIndex()->hideWhen('user', null),
