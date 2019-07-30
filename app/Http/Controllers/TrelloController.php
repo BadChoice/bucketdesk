@@ -11,7 +11,7 @@ class TrelloController extends Controller
     public function index()
     {
         $username = request('username') ?? auth()->user()->username;
-        $issues = Issue::where('username', $username)->whereIn('status', [Issue::STATUS_NEW, Issue::STATUS_OPEN, Issue::STATUS_RESOLVED, Issue::STATUS_HOLD])->orderBy(DB::raw('`order` IS NULL, `order`'), 'asc')->get();
+        $issues = $this->fetchTrelloIssues($username);
         return view('trello.index', [
             'username'  => $username,
             'users'     => User::all(),
@@ -44,5 +44,22 @@ class TrelloController extends Controller
         $issues->each(function ($issue) use ($sorted) {
             $issue->ignoreBitbucketUpdate()->update(['order' => $sorted[$issue->id]]);
         });
+    }
+
+    /**
+     * @param $username
+     * @return mixed
+     */
+    protected function fetchTrelloIssues($username)
+    {
+        $query = Issue::where('username', $username)
+            ->whereIn('status', [Issue::STATUS_NEW, Issue::STATUS_OPEN, Issue::STATUS_RESOLVED, Issue::STATUS_HOLD])
+            ->orderBy(DB::raw('`order` IS NULL, `order`'), 'asc');
+        if (request('tag')){
+            $query->whereHas('tags', function($query){
+                return $query->where('name', request('tag'));
+            });
+        }
+        return $query->get();
     }
 }
