@@ -14,7 +14,12 @@ class IssuePresenter
 
     public function status()
     {
-        return array_flip(Issue::statuses())[$this->issue->status];
+        $statusFontAwesome = [
+            Issue::STATUS_NEW => 'fa-circle-o lighter-gray',
+            Issue::STATUS_OPEN => 'fa-adjust green',
+            Issue::STATUS_HOLD => 'fa-pause-circle-o lighter-gray',
+        ][$this->issue->status] ?? 'fa-circle green';
+        return "<i class=\"fa {$statusFontAwesome}\" aria-hidden=\"true\"></i>";
     }
 
     public function priority()

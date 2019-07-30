@@ -7,6 +7,7 @@ use App\ThrustHelpers\Actions\QuickCreateIssue;
 use App\ThrustHelpers\Fields\IssueLink;
 use App\ThrustHelpers\Fields\PriorityField;
 use App\ThrustHelpers\Fields\ResolveField;
+use App\ThrustHelpers\Fields\StatusField;
 use App\ThrustHelpers\Fields\Tags;
 use App\ThrustHelpers\Fields\TitleField;
 use App\ThrustHelpers\Fields\TypeField;
@@ -43,7 +44,7 @@ class Issue extends Resource
             BelongsTo::make('user')->allowNull()->rowClass('date')->onlyInEdit(),
             PriorityField::make('priority')->sortable()->options(array_flip(\App\Issue::priorities()))->rowClass($this->noEmphasisClass),
             TypeField::make('type')->sortable()->options(array_flip(\App\Issue::types()))->rowClass($this->noEmphasisClass),
-            Select::make('status')->sortable()->options(array_flip(\App\Issue::statuses()))->rowClass($this->noEmphasisClass),
+            StatusField::make('status')->sortable()->options(array_flip(\App\Issue::statuses())),
             Date::make('date')->sortable()->rowClass($this->noEmphasisClass),
             Date::make('created_at')->sortable()->onlyInIndex()->format('M d')->rowClass($this->noEmphasisClass),
             Gravatar::make('user.email','')->onlyInIndex()->hideWhen('user', null),
