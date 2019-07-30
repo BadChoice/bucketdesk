@@ -12,7 +12,7 @@
                 <form action="{{route('comments.update', $issue)}}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                    <textarea style="width:600px; height:100px;" name="content">{$content->raw}}</textarea>
+                    <textarea style="width:600px; height:100px;" name="content">{{$content->raw}}</textarea>
                     <br>
                     <button class="secondary">Update Description</button>
                 </form>

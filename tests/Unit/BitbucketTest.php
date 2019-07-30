@@ -27,7 +27,6 @@ class BitbucketTest extends TestCase
         $issues = (new Bitbucket)->getIssues('revo-pos', 'revo-back', [
             'status' => ['open', 'new']
         ]);
-        dd($issues);
         $this->assertTrue(count($issues->values) > 2);
     }
 
@@ -39,6 +38,22 @@ class BitbucketTest extends TestCase
               "status" => "open",
               "priority" => "major",
               "type" => "task",
+        ]);
+        dd($r);
+    }
+
+    /** @test */
+    public function it_can_create_a_comment()
+    {
+        $r = (new Bitbucket)->createComment('revo-pos', 'revo-app', 876, "this is my comment");
+        dd($r);
+    }
+
+    /** @test */
+    public function it_can_update_issue_description()
+    {
+        $r = (new Bitbucket)->updateIssue('revo-pos', 'revo-app', 876, [
+            "content" => ["raw" => 'patata']
         ]);
         dd($r);
     }

@@ -3,6 +3,13 @@
 namespace App\IssueTrackers\Bitbucket;
 
 // https://gentlero.bitbucket.io/bitbucket-api/1.0/examples/repositories/issues.html
+use App\IssueTrackers\IssueTrackerException;
+use Bitbucket\API\Authentication\Basic;
+use Bitbucket\API\Groups;
+use Bitbucket\API\Http\Listener\OAuth2Listener;
+use Bitbucket\API\Repositories\Hooks;
+use Bitbucket\API\Repositories\Issues;
+
 class Bitbucket
 {
     protected $auth;
@@ -15,12 +22,12 @@ class Bitbucket
 
     public function __construct()
     {
-        $this->auth = new \Bitbucket\API\Authentication\Basic(config('services.bitbucket.user'), config('services.bitbucket.password'));
+        $this->auth = new Basic(config('services.bitbucket.user'), config('services.bitbucket.password'));
     }
 
     public function getIssues($account, $repoSlug, $options = [])
     {
-        $issue = new \Bitbucket\API\Repositories\Issues();
+        $issue = new Issues();
         $this->setAuth($issue);
 
         return $this->parseResponse(
@@ -30,7 +37,7 @@ class Bitbucket
 
     public function getIssue($account, $repoSlug, $id)
     {
-        $issue = new \Bitbucket\API\Repositories\Issues();
+        $issue = new Issues();
         $this->setAuth($issue);
         return $this->parseResponse(
             $issue->get($account, $repoSlug, $id)
@@ -39,7 +46,7 @@ class Bitbucket
 
     public function updateIssue($account, $repoSlug, $id, $fields)
     {
-        $issue = new \Bitbucket\API\Repositories\Issues();
+        $issue = new Issues();
         $this->setAuth($issue);
         return $this->parseResponse(
             $issue->update($account, $repoSlug, $id, $fields)
@@ -48,7 +55,7 @@ class Bitbucket
 
     public function createIssue($account, $repoSlug, $title, $content = '', $extra = [])
     {
-        $issue = new \Bitbucket\API\Repositories\Issues();
+        $issue = new Issues();
         $this->setAuth($issue);
         return $this->parseResponse(
             $issue->create($account, $repoSlug, array_merge([
@@ -63,7 +70,7 @@ class Bitbucket
 
     public function getIssueComments($account, $repoSlug, $id)
     {
-        $issue = new \Bitbucket\API\Repositories\Issues();
+        $issue = new Issues();
         $this->setAuth($issue);
         return $this->parseResponse(
             $issue->comments()->all($account, $repoSlug, $id)
@@ -72,21 +79,25 @@ class Bitbucket
 
     public function createComment($account, $repoSlug, $id, $comment)
     {
-        $issue = new \Bitbucket\API\Repositories\Issues();
+        $issue = new Issues();
         $this->setAuth($issue);
         return $this->parseResponse(
-            $issue->comments()->create($account, $repoSlug, $id, $comment)
+            $issue->comments()->create($account, $repoSlug, $id,  ["raw" => $comment] )
         );
     }
 
     public function parseResponse($response)
     {
-        return json_decode($response->getContent());
+        $response = json_decode($response->getContent());
+        if (isset($response->type) && $response->type == 'error'){
+           throw new IssueTrackerException($response->error->message . ':' . $response->error->fields->content);
+        }
+        return $response;
     }
 
     public function getWebhooks($account, $repoSlug)
     {
-        $hooks  = new \Bitbucket\API\Repositories\Hooks();
+        $hooks  = new Hooks();
         $this->setAuth($hooks);
 
         return $this->parseResponse(
@@ -96,7 +107,7 @@ class Bitbucket
 
     public function createHook($account, $repoSlug, $url)
     {
-        $hook  = new \Bitbucket\API\Repositories\Hooks();
+        $hook  = new Hooks();
         $this->setAuth($hook);
 
         $response = $hook->create($account, $repoSlug, [
@@ -113,7 +124,7 @@ class Bitbucket
 
     public function getGroups($account)
     {
-        $groups = new \Bitbucket\API\Groups();
+        $groups = new Groups();
         $this->setAuth($groups);
 
         return $this->parseResponse(
@@ -125,7 +136,7 @@ class Bitbucket
     {
         //$issue->setCredentials($this->auth);
         $class->getClient()->setApiVersion('2.0')->addListener(
-            new \Bitbucket\API\Http\Listener\OAuth2Listener(static::$oauthParameters ?? [
+            new OAuth2Listener(static::$oauthParameters ?? [
                 'client_id'         => config('services.bitbucket.oauth.key'),
                 'client_secret'     => config('services.bitbucket.oauth.secret'),
             ])

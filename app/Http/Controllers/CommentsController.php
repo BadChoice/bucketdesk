@@ -14,7 +14,7 @@ class CommentsController extends Controller
 
     public function update(Issue $issue)
     {
-        $issue->updateBitbucketWith(['content' => request('content')]);
+        $issue->updateDescription(request('content'));
         return back();
     }
 }

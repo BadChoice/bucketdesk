@@ -43,7 +43,7 @@ class InitializeRepo implements ShouldQueue
             'start'  => $start,
             'limit'  => $limit,
         ]);
-        foreach ($issues->issues as $id => $issue) {
+        foreach ($issues->values as $id => $issue) {
             Issue::fromBitbucketIssue($this->repository, $issue);
         }
         return $issues;
@@ -53,7 +53,7 @@ class InitializeRepo implements ShouldQueue
     {
         $start  = 0;
         $issues = $this->parseIssues($start, 50);
-        while (count($issues->issues) == 50) {
+        while (count($issues->values) == 50) {
             $issues = $this->parseIssues($start, 50);
             $start += 50;
         }
