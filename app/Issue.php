@@ -56,7 +56,7 @@ class Issue extends Model
             'title'         => $this->title,
             'state'         => array_flip(static::statuses())[$this->status],
             'priority'      => array_flip(static::priorities())[$this->priority],
-            'type'          => array_flip(static::types())[$this->type],
+            'kind'          => array_flip(static::types())[$this->type],
         ]);
     }
 

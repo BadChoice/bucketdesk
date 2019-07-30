@@ -27,7 +27,7 @@ class BitbucketTest extends TestCase
         $issues = (new Bitbucket)->getIssues('revo-pos', 'revo-back', [
             'status' => ['open', 'new']
         ]);
-
+        dd($issues);
         $this->assertTrue(count($issues->values) > 2);
     }
 
