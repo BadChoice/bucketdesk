@@ -51,15 +51,18 @@ class Issue extends Model
 
     public function updateBitbucketIssue()
     {
-        $this->updateBitbucketWith([
-            'assignee'   => [
+        $params = [
+            'title' => $this->title,
+            'state' => array_flip(static::statuses())[$this->status],
+            'priority' => array_flip(static::priorities())[$this->priority],
+            'kind' => array_flip(static::types())[$this->type],
+        ];
+        if ($this->username) {
+            $params = array_merge($params, ['assignee' => [
                 'username' => $this->username,   // TODO: change by assigne -> Account id
-            ],
-            'title'         => $this->title,
-            'state'         => array_flip(static::statuses())[$this->status],
-            'priority'      => array_flip(static::priorities())[$this->priority],
-            'kind'          => array_flip(static::types())[$this->type],
-        ]);
+            ]]);
+        }
+        $this->updateBitbucketWith($params);
     }
 
     public function updateDescription($description){

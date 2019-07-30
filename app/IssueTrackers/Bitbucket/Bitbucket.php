@@ -89,8 +89,11 @@ class Bitbucket
     public function parseResponse($response)
     {
         $response = json_decode($response->getContent());
+//        dd($response);
         if (isset($response->type) && $response->type == 'error'){
-           throw new IssueTrackerException($response->error->message . ':' . $response->error->fields->content);
+           throw new IssueTrackerException($response->error->message . ':' . collect($response->error->fields)->map(function($value, $key){
+                return $key . " => " . $value;
+           })->implode("\n"));
         }
         return $response;
     }
