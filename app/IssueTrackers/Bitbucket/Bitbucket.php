@@ -60,7 +60,7 @@ class Bitbucket
         return $this->parseResponse(
             $issue->create($account, $repoSlug, array_merge([
                 'title'     => $title,
-                'content'   => $content,
+                'content'   => ["raw" => $content],
                 'kind'      => 'task',
                 'priority'  => 'major',
                 'status'    => 'new'

@@ -31,6 +31,13 @@ class BitbucketTest extends TestCase
     }
 
     /** @test */
+    public function it_can_create_an_issue()
+    {
+        $r = (new Bitbucket)->createIssue('revo-pos', 'revo-back', "the title", "The content");
+        dd($r);
+    }
+
+    /** @test */
     public function can_update_issue(){
         $r = (new Bitbucket)->updateIssue('revo-pos', 'revo-app', 1133, [
               "responsible" =>  'BadChoice',
