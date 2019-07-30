@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "844d12b833304e80dcfb797144768006",
+    "content-hash": "9a479a3e4ba200c510efc5d257617af7",
     "packages": [
         {
             "name": "badchoice/hurricane",
@@ -458,8 +458,8 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:BadChoice/bitbucket-api-fork.git",
-                "reference": "b864369088bc8b0dafd326051d56d9606d63aa86"
+                "url": "https://BadChoice@bitbucket.org/BadChoice/bitbucket-api-fork.git",
+                "reference": "a58815b55b2a2e4209a6e165d14bdc7cf5fd4a63"
             },
             "require": {
                 "jacobkiers/oauth": "~1.0",
@@ -511,7 +511,7 @@
                 "api",
                 "bitbucket"
             ],
-            "time": "2019-07-30T14:37:01+00:00"
+            "time": "2019-07-30T15:24:24+00:00"
         },
         {
             "name": "graham-campbell/markdown",
