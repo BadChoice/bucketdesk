@@ -7,7 +7,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:BadChoice/bitbucket-api-fork.git"
+            "url": "https://BadChoice@bitbucket.org/BadChoice/bitbucket-api-fork.git"
         }
     ],
     "require": {
