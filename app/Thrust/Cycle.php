@@ -47,7 +47,7 @@ class Cycle extends Resource
             //StatusField::make('status','')->sortable()->options(array_flip(\App\Issue::statuses()))->rowClass('pr2'),
             //TitleField::make('title')->sortable(),
             Text::make('title')->displayWith(function($cycle){
-                return "<a href={route('thrust.hasMany', ['cycles', $cycle->id, 'issues'])}>{$cycle->title}</a>";
+                return "<a href=" . route('thrust.hasMany', ['cycles', $cycle->id, 'issues']) . ">" . $cycle->title . "</a>";
             }),
             HasMany::make('issues')->onlyCount()->withLink(),
             CompletionField::make('id', 'completion'),
