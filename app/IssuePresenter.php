@@ -18,9 +18,11 @@ class IssuePresenter
             Issue::STATUS_NEW => 'fa-circle-o lighter-gray',
             Issue::STATUS_OPEN => 'fa-adjust green',
             Issue::STATUS_HOLD => 'fa-pause-circle-o lighter-gray',
+            Issue::STATUS_RESOLVED => 'fa-circle green',
             Issue::STATUS_CLOSED => 'fa-check-circle green',
             Issue::STATUS_INVALID => 'fa-times-circle red',
-            Issue::STATUS_WONTFIX => 'fa-minus-circle lighter-gray'
+            Issue::STATUS_DUPLICATED => 'fa-clone lighter-gray',
+            Issue::STATUS_WONTFIX => 'fa-minus-circle lighter-gray',
         ][$this->issue->status] ?? 'fa-circle green';
         return "<i class=\"fa {$statusFontAwesome}\" aria-hidden=\"true\"></i>";
     }
