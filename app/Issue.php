@@ -96,6 +96,11 @@ class Issue extends Model
         $this->update(['status' => static::STATUS_CLOSED]);
     }
 
+    public function moveToBacklog($toBacklog = true)
+    {
+        $this->update(['backlog' => $toBacklog]);
+    }
+
     public function comment($comment)
     {
         return app(Bitbucket::class)->createComment($this->repository->account, $this->repository->repo, $this->issue_id, $comment);

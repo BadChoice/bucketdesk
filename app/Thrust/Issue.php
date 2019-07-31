@@ -3,6 +3,8 @@
 namespace App\Thrust;
 
 use App\ThrustHelpers\Actions\CloseIssues;
+use App\ThrustHelpers\Actions\MoveToActive;
+use App\ThrustHelpers\Actions\MoveToBacklog;
 use App\ThrustHelpers\Actions\QuickCreateIssue;
 use App\ThrustHelpers\Fields\IssueLink;
 use App\ThrustHelpers\Fields\PriorityField;
@@ -55,10 +57,12 @@ class Issue extends Resource
 
     protected function getBaseQuery()
     {
+        $query = parent::getBaseQuery();
+        $query->where('backlog', intval(request()->has('backlog')));
         if ($this->filtersApplied()->keys()->contains('App\ThrustHelpers\Filters\StatusFilter') && $this->filtersApplied()['App\ThrustHelpers\Filters\StatusFilter'] != '--'){
-            return parent::getBaseQuery();
+            return $query;
         }
-        return parent::getBaseQuery()->where('status', '<', \App\Issue::STATUS_RESOLVED);
+        return $query->where('status', '<', \App\Issue::STATUS_RESOLVED);
     }
 
 
@@ -72,7 +76,9 @@ class Issue extends Resource
     public function actions()
     {
         return [
-            new CloseIssues()
+            new CloseIssues,
+            new MoveToBacklog,
+            new MoveToActive,
         ];
     }
 

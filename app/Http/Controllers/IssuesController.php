@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Issue;
 use App\Repository;
+use BadChoice\Thrust\Controllers\ThrustController;
 
 class IssuesController extends Controller
 {
@@ -36,5 +37,11 @@ class IssuesController extends Controller
     {
         $issue->resolve();
         return back();
+    }
+
+    public function backlog()
+    {
+        request()->merge(['backlog' => true]);
+        return (new ThrustController)->index('issues');
     }
 }
