@@ -9,7 +9,8 @@ class CompletionProgressField extends Text
     public function __construct()
     {
         $this->onlyInIndex()->displayWith(function($cycle){
-            return $cycle->completedIssues()->count() . ' / ' . $cycle->pendingIssues()->count();
+            return $cycle->completedIssues()->count() . ' Done - ' .
+                   $cycle->pendingIssues()->count() .' Pending';
         });
     }
 
