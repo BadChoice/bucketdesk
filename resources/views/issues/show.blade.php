@@ -22,14 +22,15 @@
 ])
 
 @foreach(collect($comments)->sortBy('created_on') as $comment)
-
-    @include('components.comment', [
-        'avatar' => $comment->user->links->avatar->href,
-        'name' => $comment->user->display_name,
-        'date' => Carbon\Carbon::parse($comment->created_on),
-        'content' => $comment->content,
-        'editable' => false,
-    ])
+    @if (! empty($comment->content))
+        @include('components.comment', [
+            'avatar' => $comment->user->links->avatar->href,
+            'name' => $comment->user->display_name,
+            'date' => Carbon\Carbon::parse($comment->created_on),
+            'content' => $comment->content,
+            'editable' => false,
+        ])
+    @endif
 @endforeach
 
 <div class="mb3 pt3 pb3 bb mt2">
