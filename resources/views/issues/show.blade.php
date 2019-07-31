@@ -22,7 +22,7 @@
 ])
 
 @foreach(collect($comments)->sortBy('created_on') as $comment)
-    @if (! empty($comment->content))
+    @if ( ! empty($comment->content->raw))
         @include('components.comment', [
             'avatar' => $comment->user->links->avatar->href,
             'name' => $comment->user->display_name,
