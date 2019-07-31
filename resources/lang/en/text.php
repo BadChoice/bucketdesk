@@ -13,4 +13,5 @@ return [
     'date'         => 'Date',
     'created_at'   => 'Created',
     'user'         => 'User',
+    'cycle'        => 'Cycle|Cycles'
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use App\ThrustHelpers\Actions\AssignToCycle;
 use App\ThrustHelpers\Actions\CloseIssues;
 use App\ThrustHelpers\Actions\MoveToActive;
 use App\ThrustHelpers\Actions\MoveToBacklog;
@@ -18,21 +19,19 @@ use App\ThrustHelpers\Filters\RepositoryFilter;
 use App\ThrustHelpers\Filters\StatusFilter;
 use App\ThrustHelpers\Filters\TypeFilter;
 use App\ThrustHelpers\Filters\UserFilter;
+use BadChoice\Thrust\ChildResource;
 use BadChoice\Thrust\Fields\BelongsTo;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Gravatar;
-use BadChoice\Thrust\Fields\Link;
-use BadChoice\Thrust\Fields\Select;
-use BadChoice\Thrust\Fields\Text;
-use BadChoice\Thrust\Filters\Filter;
-use BadChoice\Thrust\Resource;
 
-class Issue extends Resource
+class Issue extends ChildResource
 {
     public static $model = \App\Issue::class;
     public static $search = ['title', 'repository.name', 'tags.name', 'username'];
     public static $defaultOrder = 'desc';
     public static $defaultSort = 'updated_at';
+
+    public static $parentRelation = 'cycle';
 
     protected $noEmphasisClass = 'o70';
 
@@ -79,6 +78,7 @@ class Issue extends Resource
             new CloseIssues,
             new MoveToBacklog,
             new MoveToActive,
+            new AssignToCycle,
         ];
     }
 

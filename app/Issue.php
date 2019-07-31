@@ -208,4 +208,14 @@ class Issue extends Model
     {
         return $query->where('status', Issue::STATUS_OPEN);
     }
+
+    public function cycle()
+    {
+        return $this->belongsTo(Cycle::class);
+    }
+
+    public function isCompleted()
+    {
+        return $this->status >= self::STATUS_RESOLVED;
+    }
 }
