@@ -60,6 +60,9 @@ class TrelloController extends Controller
                 return $query->where('name', request('tag'));
             });
         }
+        if (request('cycle')) {
+            $query->where('cycle_id', request('cycle'));
+        }
         return $query->get();
     }
 }
