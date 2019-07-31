@@ -30,7 +30,7 @@ class Cycle extends Model
 
     public function completionPercentage()
     {
-        if ($this->issues->count() == 0) return 100;
+        if ($this->issues->count() == 0) return 1;
         return $this->completedIssues()->count() / $this->issues->count();
     }
 
