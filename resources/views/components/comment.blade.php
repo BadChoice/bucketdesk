@@ -1,5 +1,5 @@
-<div class="bt clear-both pt2">
-    <img src="{{$avatar}}" class="circle float-left" style="height:50px; width:50px;">
+<div class="bt clear-both pt2 pb5">
+    <img src="{{$avatar}}" class="circle float-left" style="height:40px; width:40px;">
     <div class="float-left" style="margin-left:20px; overflow:scroll; max-width: 85%;">
         <span class="bold">{{ $name }}</span> ∞
         <span> {{ $date->timezone('Europe/Madrid')->diffForHumans() }}</span>

@@ -57,6 +57,9 @@ class Issue extends ChildResource
     protected function getBaseQuery()
     {
         $query = parent::getBaseQuery();
+        if ($this->parentId) {
+            return $query;  //It means we are in cycle
+        }
         $query->where('backlog', intval(request()->has('backlog')));
         if ($this->filtersApplied()->keys()->contains('App\ThrustHelpers\Filters\StatusFilter') && $this->filtersApplied()['App\ThrustHelpers\Filters\StatusFilter'] != '--'){
             return $query;

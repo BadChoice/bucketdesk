@@ -6,6 +6,8 @@ use App\ThrustHelpers\Actions\CloseIssues;
 use App\ThrustHelpers\Actions\MoveToActive;
 use App\ThrustHelpers\Actions\MoveToBacklog;
 use App\ThrustHelpers\Actions\QuickCreateIssue;
+use App\ThrustHelpers\Fields\CompletionField;
+use App\ThrustHelpers\Fields\CompletionProgressField;
 use App\ThrustHelpers\Fields\IssueLink;
 use App\ThrustHelpers\Fields\PriorityField;
 use App\ThrustHelpers\Fields\ResolveField;
@@ -35,6 +37,8 @@ class Cycle extends Resource
     public static $defaultOrder = 'desc';
     public static $defaultSort = 'date';
 
+    // https://twitter.com/karrisaarinen/status/1148287007329701888/photo/1
+    // https://twitter.com/linear_app/status/1153344163410141184/photo/1
 
     public function fields()
     {
@@ -44,25 +48,10 @@ class Cycle extends Resource
             //TitleField::make('title')->sortable(),
             Text::make('title'),
             HasMany::make('issues')->onlyCount()->withLink(),
-            Text::make('id', 'completion')->displayWith(function($cycle){
-                return $cycle->completionPercentage() . ' %';
-            })->onlyInIndex(),
-            Text::make('id', 'completed')->displayWith(function($cycle){
-                return $cycle->completedIssues()->count() . ' Done';
-            })->onlyInIndex(),
-            Text::make('id', 'Pending')->displayWith(function($cycle){
-                return $cycle->pendingIssues()->count() . ' Pending';
-            })->onlyInIndex(),
+            CompletionField::make('id', 'completion'),
+            CompletionProgressField::make('id', 'progress'),
             Date::make('date')->showInTimeAgo()->onlyInIndex(),
-            //Tags::make('tags'),
-            //BelongsTo::make('repository')->onlyInIndex()->rowClass($this->noEmphasisClass),
-            //BelongsTo::make('user')->allowNull()->rowClass('date')->onlyInEdit(),
-            //PriorityField::make('priority')->sortable()->options(array_flip(\App\Issue::priorities()))->rowClass($this->noEmphasisClass),
-            //TypeField::make('type')->sortable()->options(array_flip(\App\Issue::types()))->rowClass($this->noEmphasisClass),
             Date::make('date')->format('M d'),
-            //Date::make('created_at')->sortable()->onlyInIndex()->format('M d')->rowClass($this->noEmphasisClass),
-            //Gravatar::make('user.email','')->onlyInIndex()->hideWhen('user', null),
-
         ];
     }
 

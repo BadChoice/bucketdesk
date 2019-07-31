@@ -33,4 +33,9 @@ class Cycle extends Model
         if ($this->issues->count() == 0) return 100;
         return $this->completedIssues()->count() / $this->issues->count();
     }
+
+    public function __get($field){
+        if ($field == 'name') return $this->title;
+        return parent::__get($field);
+    }
 }
