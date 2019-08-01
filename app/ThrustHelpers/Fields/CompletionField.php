@@ -19,7 +19,7 @@ class CompletionField extends Text
         if ($value > 60) return "seventyfive";
         if ($value > 40) return "fifty";
         if ($value > 20) return "twentyfive";
-        if ($value > 5) return "ten";
+        if ($value > 5)  return "zero";
         return "";
     }
 
