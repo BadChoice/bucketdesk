@@ -31,7 +31,8 @@ class InitializeRepo implements ShouldQueue
     public function handle()
     {
         $this->createRepository();
-        $this->importDevelopers();
+        echo "/!\ Warning => Can't import developers in Bitbucket Api V2\n";
+        //$this->importDevelopers();
         $this->importIssues();
         $this->setupWebhook();
     }
@@ -49,7 +50,7 @@ class InitializeRepo implements ShouldQueue
         return $issues;
     }
 
-    public function importIssues(): void
+    public function importIssues()
     {
         $start  = 0;
         $issues = $this->parseIssues($start, 50);
