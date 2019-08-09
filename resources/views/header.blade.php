@@ -1,9 +1,17 @@
 <div class="sidebar">
     <img src="/images/logo.png" class="" height="30" style="margin-left:25px">
+
+
+
     <div class="">
         <ul>
-{{--            <li> @gravatar(auth()->user()->email) {{ auth()->user()->name }}</li>--}}
-            <li> {{ auth()->user()->name }}</li>
+            <li>
+                <div>
+                    {!! (new BadChoice\Thrust\Fields\Gravatar)->getImageTag(auth()->user()->email, 40) !!}
+                    {{ auth()->user()->name }}
+{{--                    <div style="float:right; width:95px; margin-top:6px">{!! str_replace(" ", "<br>", auth()->user()->name) !!}</div>--}}
+                </div>
+            </li>
             <li class="@if (Route::current()->getName() == 'thrust.index' && collect(Route::current()->parameters)->contains('issues')) active @endif "><a href="{{route('thrust.index', 'issues')}}"> @icon(check-square-o) Issues</a></li>
             <li class="@if (Route::current()->getName() == 'thrust.index' && collect(Route::current()->parameters)->contains('cycles')) active @endif "><a href="{{route('thrust.index', 'cycles')}}"> @icon(folder-open-o) Cycles</a></li>
             <li class="@if (Route::current()->getName() == 'my.issues.current') active @endif "><a href="{{route('my.issues.current')}}"> @icon(fire) My Current Work</a></li>
