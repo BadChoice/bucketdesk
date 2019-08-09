@@ -2,7 +2,7 @@
 <div class="mb2">
     {!! $issue->presenter()->status !!}
     {!! $issue->presenter()->priority !!}
-    {{ $issue->presenter()->type }}
+    {!! $issue->presenter()->type !!}
     {{ $issue->repository->name }}
     {!! $issue->presenter()->tags !!}
 

@@ -8,7 +8,7 @@
             <a class="gray" href="{{ $issue->remoteLink() }}" target="__blank">#{{$issue->issue_id}}</a>
             {{ $issue->repository->name }}
         </strong>
-        {{ $issue->presenter()->type }}
+        {!! $issue->presenter()->type !!}
         <div>
         {!! $issue->presenter()->tags !!}
         </div>

@@ -41,12 +41,13 @@ class IssuePresenter
 
     public function type()
     {
-        return [
-            Issue::TYPE_TASK         => '👷',
-            Issue::TYPE_BUG          => '👾',
-            Issue::TYPE_ENHANCEMENT  => '💅',
-            Issue::TYPE_PROPOSAL     => '💡',
+        $fa = [
+            Issue::TYPE_TASK         => 'fa-code', //'👷',
+            Issue::TYPE_BUG          => 'fa-bug', //'👾',
+            Issue::TYPE_ENHANCEMENT  => 'fa-diamond', '💅',
+            Issue::TYPE_PROPOSAL     => 'fa-lightbulb-o', //💡',
         ][$this->issue->type];
+        return "<i class=\"fa {$fa} fa-fw\" aria-hidden=\"true\"></i>";
     }
 
     public function tags()
