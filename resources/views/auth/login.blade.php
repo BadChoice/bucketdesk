@@ -21,7 +21,7 @@
 </head>
     <body>
         <div class="login">
-            <img src="/images/bones.png" class="mb3">
+            <img src="/images/logo.png" class="mb3" height="50">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="E-Mail">
