@@ -1,7 +1,7 @@
 <h2>#{{ $issue->issue_id }} {{ $issue->title }}</h2>
 <div class="mb2">
     {!! $issue->presenter()->status !!}
-    {{ $issue->presenter()->priority }}
+    {!! $issue->presenter()->priority !!}
     {{ $issue->presenter()->type }}
     {{ $issue->repository->name }}
     {!! $issue->presenter()->tags !!}

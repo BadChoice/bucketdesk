@@ -29,6 +29,7 @@ class IssuePresenter
 
     public function priority()
     {
+        return view('components.icons.priority', ['priority' => $this->issue->priority])->render();
         return [
             Issue::PRIORITY_TRIVIAL  => '🌈',
             Issue::PRIORITY_MINOR    => '🥊️',
