@@ -3,11 +3,11 @@
         <a href="{{route('thrust.edit', ['resourceName' => 'issues', 'id' => $issue->id])}}" class="showPopup">@icon(ellipsis-h)</a>
     </div>
     <div>
+        {!! $issue->presenter()->priority !!}
         <strong class="gray">
             <a class="gray" href="{{ $issue->remoteLink() }}" target="__blank">#{{$issue->issue_id}}</a>
             {{ $issue->repository->name }}
         </strong>
-        {{ $issue->presenter()->priority }}
         {{ $issue->presenter()->type }}
         <div>
         {!! $issue->presenter()->tags !!}
