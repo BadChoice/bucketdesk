@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <img src="/images/bones.png" class="">
+    <img src="/images/logo.png" class="" height="30" style="margin-left:25px">
     <div class="">
         <ul>
 {{--            <li> @gravatar(auth()->user()->email) {{ auth()->user()->name }}</li>--}}
