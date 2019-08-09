@@ -39,8 +39,8 @@ class Issue extends ChildResource
     {
         return [
             IssueLink::make('issue_id')->sortable()->rowClass($this->noEmphasisClass),
-            StatusField::make('status','')->sortable()->options(array_flip(\App\Issue::statuses()))->rowClass('pr2'),
-            TitleField::make('title')->sortable(),
+            StatusField::make('status')->sortable()->withoutIndexHeader()->options(array_flip(\App\Issue::statuses()))->rowClass('pr2'),
+            TitleField::make('title')->sortable()->rowClass('text-row'),
             Tags::make('tags'),
             BelongsTo::make('repository')->onlyInIndex()->rowClass($this->noEmphasisClass),
             BelongsTo::make('user')->allowNull()->rowClass('date')->onlyInEdit(),
