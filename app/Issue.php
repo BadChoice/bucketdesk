@@ -98,7 +98,11 @@ class Issue extends Model
 
     public function moveToBacklog($toBacklog = true)
     {
-        $this->update(['backlog' => $toBacklog]);
+        $this->update([
+            'backlog' => $toBacklog,
+            'status' => static::STATUS_NEW,
+            'username' => null,
+        ]);
     }
 
     public function comment($comment)
