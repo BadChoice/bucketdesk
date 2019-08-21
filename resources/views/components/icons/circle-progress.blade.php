@@ -15,7 +15,7 @@
 </svg>
 
 @if(isset($withValue))
-<div style="display: inline-block;">
+<div style="display: inline-block; margin-left:2px">
     {{ number_format($percentage, 0) }} %
 </div>
 @endif
