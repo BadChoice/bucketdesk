@@ -2,7 +2,7 @@
 <?php $randomId = str_random(6); ?>
 <svg class="progress-ring" width="{{$size}}" height="{{$size}}">
     <circle class="progress-ring__circle" stroke-width="2" fill="transparent"
-            stroke="#aaa"
+            stroke="#ccc"
             r="6" cx="{{$size/2}}" cy="{{$size/2}}"/>
 
     <circle id="{{$randomId}}" class="progress-ring__circle" stroke-width="2" fill="transparent"
@@ -10,7 +10,7 @@
         r="6" cx="{{$size/2}}" cy="{{$size/2}}"/>
 
     @if (isset($withTriangle))
-        <polygon points="6,5 6,10 11,7.5" style="fill:#aaa; stroke:#aaa ;stroke-width:1" />
+        <polygon points="6,5 6,10 11,7.5" style="fill:#ccc; stroke:#aaa ;stroke-width:1" />
     @endif
 </svg>
 
