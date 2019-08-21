@@ -9,7 +9,9 @@
             stroke="#DB4D52"
         r="6" cx="{{$size/2}}" cy="{{$size/2}}"/>
 
-    <polygon points="6,5 6,10 11,7.5" style="fill:#aaa; stroke:#aaa ;stroke-width:1" />
+    @if (isset($withTriangle))
+        <polygon points="6,5 6,10 11,7.5" style="fill:#aaa; stroke:#aaa ;stroke-width:1" />
+    @endif
 </svg>
 
 @if(isset($withValue))

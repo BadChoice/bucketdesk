@@ -60,7 +60,7 @@ class IssuePresenter
     public function cycle(){
         if (! $this->issue->cycle) return "";
         $percentage = $this->issue->cycle->completionPercentage() * 100;
-        return view('components.icons.circle-progress', ['percentage' => $percentage, 'size' => 16])->render();
+        return view('components.icons.circle-progress', ['percentage' => $percentage, 'size' => 16, 'withTriangle' => true])->render();
     }
 
     public function __get($name)
