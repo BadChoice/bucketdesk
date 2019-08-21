@@ -10,7 +10,9 @@ class CompletionField extends Text
     {
         $this->onlyInIndex()->displayWith(function($cycle){
             $percentage = $cycle->completionPercentage() * 100;
-            return "<pie class='".$this->getPercentageClass($percentage)."'></pie> " . number_format($percentage, 0) . ' %';
+            return view('components.icons.circle-progress', ['percentage' => $percentage, 'size' => 16, 'withValue' => true]);
+            //return view('components.icons.circle-progress', ['percentage' => 30, 'size' => 20]);
+            //return "<pie class='".$this->getPercentageClass($percentage)."'></pie> " . number_format($percentage, 0) . ' %';
         });
     }
 

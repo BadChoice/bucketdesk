@@ -7,6 +7,7 @@ use App\ThrustHelpers\Actions\CloseIssues;
 use App\ThrustHelpers\Actions\MoveToActive;
 use App\ThrustHelpers\Actions\MoveToBacklog;
 use App\ThrustHelpers\Actions\QuickCreateIssue;
+use App\ThrustHelpers\Fields\CycleField;
 use App\ThrustHelpers\Fields\IssueLink;
 use App\ThrustHelpers\Fields\PriorityField;
 use App\ThrustHelpers\Fields\ResolveField;
@@ -42,6 +43,7 @@ class Issue extends ChildResource
             IssueLink::make('issue_id')->sortable()->rowClass($this->noEmphasisClass),
             StatusField::make('status')->sortable()->withoutIndexHeader()->options(array_flip(\App\Issue::statuses()))->rowClass('pr2'),
             TitleField::make('title')->sortable()->rowClass('text-row'),
+            CycleField::make('cycle')->withoutIndexHeader()->onlyInIndex()->withLink(),
             TypeField::make('type')->withoutIndexHeader()->sortable()->options(array_flip(\App\Issue::types()))->rowClass($this->noEmphasisClass),
             Tags::make('tags'),
             BelongsTo::make('repository')->onlyInIndex()->rowClass($this->noEmphasisClass),

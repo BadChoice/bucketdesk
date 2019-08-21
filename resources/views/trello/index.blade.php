@@ -14,22 +14,22 @@
     <div class="trello">
         <div class="ml4 mt4">
             <ul id="new" class="sortList">
-                New
+                <span class="ml2">New</span>
                 @each('trello.card', $new, 'issue')
             </ul>
 
             <ul id="open" class="sortList">
-                Open
+                <span class="ml2">Open</span>
                 @each('trello.card', $open, 'issue')
             </ul>
 
             <ul id="on_hold" class="sortList">
-                On Hold
+                <span class="ml2">On Hold</span>
                 @each('trello.card', $hold, 'issue')
             </ul>
 
             <ul id="resolved" class="sortList">
-                Resolved
+                <span class="ml2">Resolved</span>
                 @each('trello.card', $resolved, 'issue')
             </ul>
 

@@ -1,17 +1,15 @@
 <h2>#{{ $issue->issue_id }} {{ $issue->title }}</h2>
 <div class="mb2">
-    {!! $issue->presenter()->status !!}
-    {!! $issue->presenter()->priority !!}
-    {!! $issue->presenter()->type !!}
-    {{ $issue->repository->name }}
-    {!! $issue->presenter()->tags !!}
-
+    <span class="tag">{!! $issue->presenter()->priority !!}</span>
+    <span class="tag">{!! $issue->presenter()->type !!}</span>
     @if ($issue->cycle)
-        <div class="float-right inline">
-            <a href="{{route('thrust.hasMany', ['cycle', $issue->cycle_id, 'issues'] )}}"> @icon(play-circle) {{$issue->cycle->title}}</a>
-        </div>
+        <a href="{{route('thrust.hasMany', ['cycles', $issue->cycle_id, 'issues'])}}" style="margin-left:-2px">
+            <span class="tag">{!! $issue->presenter()->cycle !!}</span>
+        </a>
     @endif
-
+    <span class="tag">{!! $issue->presenter()->status !!}</span>
+    <span class="tag">{{ $issue->repository->name }}</span>
+    {!! $issue->presenter()->tags !!}
 </div>
 @include('components.comment', [
     'avatar' => $remote->reporter->links->avatar->href,
