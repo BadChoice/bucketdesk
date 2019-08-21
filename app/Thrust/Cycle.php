@@ -21,17 +21,19 @@ class Cycle extends Resource
     // https://twitter.com/karrisaarinen/status/1148287007329701888/photo/1
     // https://twitter.com/linear_app/status/1153344163410141184/photo/1
 
+    protected $noEmphasisClass = 'o70';
+
     public function fields()
     {
         return [
             Text::make('title')->displayWith(function($cycle){
                 return "<a href=" . route('thrust.hasMany', ['cycles', $cycle->id, 'issues']) . ">" . $cycle->title . "</a>";
             })->rules('required'),
-            HasMany::make('issues')->onlyCount()->withLink(),
+            HasMany::make('issues')->onlyCount()->withLink()->rowClass($this->noEmphasisClass),
             CompletionField::make('id', 'completion'),
-            CompletionProgressField::make('id', 'progress'),
-            Date::make('date')->showInTimeAgo()->onlyInIndex(),
-            Date::make('date')->format('M d')->rules('required'),
+            CompletionProgressField::make('id', 'progress')->rowClass($this->noEmphasisClass),
+            Date::make('date')->showInTimeAgo()->onlyInIndex()->rowClass($this->noEmphasisClass),
+            Date::make('date')->format('M d')->rules('required')->rowClass($this->noEmphasisClass),
 
             CompleteCycleField::make('id')->withoutIndexHeader()
         ];
