@@ -25,6 +25,6 @@
 
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = `${circumference}`;
-    const offset = circumference - {{ $percentage }} / 100 * circumference;
+    var offset = circumference - {{ $percentage }} / 100 * circumference;
     circle.style.strokeDashoffset = offset;
 </script>
