@@ -38,4 +38,9 @@ class Cycle extends Model
         if ($field == 'name') return $this->title;
         return parent::__get($field);
     }
+
+    public function complete()
+    {
+        $this->update(['completed' => true]);
+    }
 }

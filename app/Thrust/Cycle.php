@@ -2,32 +2,13 @@
 
 namespace App\Thrust;
 
-use App\ThrustHelpers\Actions\CloseIssues;
-use App\ThrustHelpers\Actions\MoveToActive;
-use App\ThrustHelpers\Actions\MoveToBacklog;
-use App\ThrustHelpers\Actions\QuickCreateIssue;
+use App\ThrustHelpers\Fields\CompleteCycleField;
 use App\ThrustHelpers\Fields\CompletionField;
 use App\ThrustHelpers\Fields\CompletionProgressField;
-use App\ThrustHelpers\Fields\IssueLink;
-use App\ThrustHelpers\Fields\PriorityField;
-use App\ThrustHelpers\Fields\ResolveField;
-use App\ThrustHelpers\Fields\StatusField;
-use App\ThrustHelpers\Fields\Tags;
-use App\ThrustHelpers\Fields\TitleField;
-use App\ThrustHelpers\Fields\TypeField;
-use App\ThrustHelpers\Filters\PriorityFilter;
-use App\ThrustHelpers\Filters\RepositoryFilter;
-use App\ThrustHelpers\Filters\StatusFilter;
-use App\ThrustHelpers\Filters\TypeFilter;
-use App\ThrustHelpers\Filters\UserFilter;
-use BadChoice\Thrust\Fields\BelongsTo;
+use App\ThrustHelpers\Filters\CompletedFilter;
 use BadChoice\Thrust\Fields\Date;
-use BadChoice\Thrust\Fields\Gravatar;
 use BadChoice\Thrust\Fields\HasMany;
-use BadChoice\Thrust\Fields\Link;
-use BadChoice\Thrust\Fields\Select;
 use BadChoice\Thrust\Fields\Text;
-use BadChoice\Thrust\Filters\Filter;
 use BadChoice\Thrust\Resource;
 
 class Cycle extends Resource
@@ -45,18 +26,23 @@ class Cycle extends Resource
         return [
             Text::make('title')->displayWith(function($cycle){
                 return "<a href=" . route('thrust.hasMany', ['cycles', $cycle->id, 'issues']) . ">" . $cycle->title . "</a>";
-            }),
+            })->rules('required'),
             HasMany::make('issues')->onlyCount()->withLink(),
             CompletionField::make('id', 'completion'),
             CompletionProgressField::make('id', 'progress'),
             Date::make('date')->showInTimeAgo()->onlyInIndex(),
-            Date::make('date')->format('M d'),
+            Date::make('date')->format('M d')->rules('required'),
+
+            CompleteCycleField::make('id')->withoutIndexHeader()
         ];
     }
 
     protected function getBaseQuery()
     {
         $query = parent::getBaseQuery();
+        if (! request()->has('filters')) {
+            return $query->where('completed', 0);
+        }
         return $query;
     }
 
@@ -80,11 +66,7 @@ class Cycle extends Resource
     public function filters()
     {
         return [
-          //  new PriorityFilter,
-           // new TypeFilter,
-           // new StatusFilter,
-           // new RepositoryFilter,
-           // new UserFilter,
+            new CompletedFilter,
         ];
     }
 
