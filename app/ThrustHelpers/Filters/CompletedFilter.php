@@ -16,9 +16,9 @@ class CompletedFilter extends SelectFilter
     public function options()
     {
         return [
-            'incomplete' => 0,
-            'completed'  => 1,
-            'all'       => -1
+            'Incomplete' => 0,
+            'Completed'  => 1,
+            'All'       => -1
         ];
     }
 }
