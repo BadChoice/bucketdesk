@@ -1,4 +1,12 @@
-<div class="sidebar">
+<div id="sidebar-toggle" class="fs4 mt2">
+    <div id="sidebar-decrease" class="absolute hidden" style="margin-left:168px; z-index: 110; margin-top: -4px;">
+        @icon(bars)
+    </div>
+    <div id="sidebar-increase" class="absolute ml4">
+        @icon(bars)
+    </div>
+</div>
+<div class="sidebar" id="sidebar">
     <img src="/images/logo.png" class="" height="30" style="margin-left:25px">
 
 
