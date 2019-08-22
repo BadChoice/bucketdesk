@@ -42,7 +42,7 @@ class Issue extends ChildResource
             PriorityField::make('priority')->sortable()->withoutIndexHeader()->options(array_flip(\App\Issue::priorities()))->rowClass($this->noEmphasisClass),
             IssueLink::make('issue_id')->sortable()->rowClass($this->noEmphasisClass),
             StatusField::make('status')->sortable()->withoutIndexHeader()->options(array_flip(\App\Issue::statuses()))->rowClass('pr2'),
-            TitleField::make('title')->sortable()->rowClass('text-row'),
+            TitleField::make('title')->sortable()->rowClass('text-row')->attributes('autofocus'),
             CycleField::make('cycle')->withoutIndexHeader()->onlyInIndex()->withLink(),
             TypeField::make('type')->withoutIndexHeader()->sortable()->options(array_flip(\App\Issue::types()))->rowClass($this->noEmphasisClass),
             Tags::make('tags'),
@@ -62,7 +62,9 @@ class Issue extends ChildResource
         if ($this->parentId) {
             return $query;  //It means we are in cycle
         }
-        $query->where('backlog', intval(request()->has('backlog')));
+        if (!request()->has('search')) {
+            $query->where('backlog', intval(request()->has('backlog')));
+        }
         if ($this->filtersApplied()->keys()->contains('App\ThrustHelpers\Filters\StatusFilter') && $this->filtersApplied()['App\ThrustHelpers\Filters\StatusFilter'] != '--'){
             return $query;
         }
@@ -70,12 +72,12 @@ class Issue extends ChildResource
     }
 
 
-    public function mainActions()
+    /*public function mainActions()
     {
         return [
             QuickCreateIssue::make('createIssue'),
         ];
-    }
+    }*/
 
     public function actions()
     {
