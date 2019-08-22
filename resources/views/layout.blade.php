@@ -14,7 +14,7 @@
         <div id="popup" class="popup">
             <div id="popupContent"></div>
         </div>
-        <div class="content mt2">
+        <div id="content" class="content mt2">
             @yield('content')
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
