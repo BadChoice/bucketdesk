@@ -72,12 +72,12 @@ class Issue extends ChildResource
     }
 
 
-    /*public function mainActions()
+    public function mainActions()
     {
         return [
             QuickCreateIssue::make('createIssue'),
         ];
-    }*/
+    }
 
     public function actions()
     {
