@@ -14,6 +14,10 @@ class Cycle extends Model
         return $this->hasMany(Issue::class);
     }
 
+    public function scopeIncomplete($query){
+        return $query->where('completed', 0);
+    }
+
     public function completedIssues()
     {
         return $this->issues->filter(function($issue){

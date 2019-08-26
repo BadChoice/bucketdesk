@@ -13,7 +13,7 @@ class AssignToCycle extends Action
     public function fields()
     {
         return [
-            Select::make('cycle_id')->options(Cycle::all()->pluck('title', 'id')->toArray())->allowNull()
+            Select::make('cycle_id')->options(Cycle::incomplete()->pluck('title', 'id')->toArray())->allowNull()
         ];
     }
 

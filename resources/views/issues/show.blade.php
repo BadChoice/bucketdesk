@@ -40,8 +40,14 @@
     </form>
 </div>
 <div>
-@if ($issue->status < \App\Issue::STATUS_RESOLVED)
-    <a href="{{route('issues.resolve', $issue)}}" class="button">RESOLVE</a>
-@endif
-<a href="{{$issue->remoteLink()}}" target="__blank">See on Bitbucket</a>
+    @if ($issue->status < \App\Issue::STATUS_RESOLVED)
+        <a href="{{route('issues.resolve', $issue)}}" class="button">RESOLVE</a>
+    @endif
+    <a href="{{$issue->remoteLink()}}" target="__blank">See on Bitbucket</a>
+
+    <div class="float-right">
+        <a href="{{route('issues.toggleBacklog', $issue)}}">
+            @if($issue->backlog) Move to active @else Move To Backlog @endif
+        </a>
+    </div>
 </div>
