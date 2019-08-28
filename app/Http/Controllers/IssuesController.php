@@ -44,4 +44,10 @@ class IssuesController extends Controller
         request()->merge(['backlog' => true]);
         return (new ThrustController)->index('issues');
     }
+
+    public function toggleBacklog(Issue $issue)
+    {
+        $issue->moveToBacklog(! $issue->backlog);
+        return back();
+    }
 }
