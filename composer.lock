@@ -40,12 +40,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/BadChoice/thrust.git",
-                "reference": "4d6d57fe215d042b3d856e66fdcbbbe163c926e6"
+                "reference": "7ae56112441299adb94d02061a2378aa5fe087d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BadChoice/thrust/zipball/4d6d57fe215d042b3d856e66fdcbbbe163c926e6",
-                "reference": "4d6d57fe215d042b3d856e66fdcbbbe163c926e6",
+                "url": "https://api.github.com/repos/BadChoice/thrust/zipball/7ae56112441299adb94d02061a2378aa5fe087d0",
+                "reference": "7ae56112441299adb94d02061a2378aa5fe087d0",
                 "shasum": ""
             },
             "require": {
@@ -79,7 +79,7 @@
                 }
             ],
             "description": "A simple resource crud generator",
-            "time": "2019-08-26T16:02:24+00:00"
+            "time": "2019-08-28T16:31:37+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
