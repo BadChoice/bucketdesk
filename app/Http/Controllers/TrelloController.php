@@ -53,6 +53,7 @@ class TrelloController extends Controller
     protected function fetchTrelloIssues($username)
     {
         $query = Issue::where('username', $username)
+            ->where('backlog', false)
             ->whereIn('status', [Issue::STATUS_NEW, Issue::STATUS_OPEN, Issue::STATUS_RESOLVED, Issue::STATUS_HOLD])
             ->orderBy(DB::raw('`order` IS NULL, `order`'), 'asc');
         if (request('tag')){
