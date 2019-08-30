@@ -38,6 +38,9 @@ a{
 }
 
 
+#sidebar-increase{
+  margin-top: -4px;
+}
 .sidebar{
   position: absolute;
   background-color:white;
@@ -134,7 +137,7 @@ a.button{
 }
 
 .description .title{
-  .ml4; .mt4; .bold; .fs3;
+  .mt4; .bold; .fs3;
 }
 
 .thrust-main-actions{
@@ -165,12 +168,18 @@ td.date{
 }
 
 .text-row{
-    max-width:450px;
+  max-width:450px;
 }
 
-@media (max-width: 600px) {
-    .thrust-index-title{
-        .ml4;   // TODO: Not working, why? look deeper
-    }
+@media only screen and (max-width: 1024px) {
+  .thrust-index-title{
+    margin-left: 68px;   // TODO: Not working, why? look deeper
+  }
+}
+@media not screen and (max-width: 1024px) {
+  .thrust-index-title{
+    .ml4
+    //margin-left: 4px;   // TODO: Not working, why? look deeper
+  }
 }
 
