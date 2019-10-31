@@ -26,4 +26,18 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     {!! $calendar->script() !!}
+    @csrf
+    <script>
+
+        function showIssue(info){
+            showPopup("{{route('issues.show', 1111)}}".replace("1111", info.id))
+        }
+        function updateDate(info) {
+            $.post("{{route('thrust.update', ['issues', 1111])}}".replace("1111", info.id), {
+                "_token" : "{{csrf_token()}}",
+                "_method" : "put",
+                "date" : info.start.toISOString()
+            }, function(){})
+        }
+    </script>
 @stop

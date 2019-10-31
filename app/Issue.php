@@ -6,7 +6,7 @@ use App\IssueTrackers\Bitbucket\Bitbucket;
 use App\Observers\IssueObserver;
 use Illuminate\Database\Eloquent\Model;
 
-class Issue extends Model implements \MaddHatter\LaravelFullcalendar\Event
+class Issue extends Model implements \MaddHatter\LaravelFullcalendar\IdentifiableEvent
 {
     use CalendarEventTrait;
 

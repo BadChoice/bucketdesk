@@ -50,7 +50,12 @@ class IssuesController extends Controller
     {
         $events = Issue::workingOn()->whereNotNull('date')->get();
         $pending = Issue::workingOn()->whereNotNull('date')->where('date', '<', now()->toDateString())->orderBy('date')->get();
-        $calendar = Calendar::addEvents($events);
+        $calendar = Calendar::addEvents($events)->setOptions([ //set fullcalendar options
+            'editable' => true,
+        ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+            'eventClick' => 'function(info) {showIssue(info)}',
+            'eventDrop' => 'function(info) {updateDate(info)}',
+        ]);
         return view('calendar.index', ['calendar' => $calendar, 'pending' => $pending]);
     }
 
