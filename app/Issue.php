@@ -6,8 +6,10 @@ use App\IssueTrackers\Bitbucket\Bitbucket;
 use App\Observers\IssueObserver;
 use Illuminate\Database\Eloquent\Model;
 
-class Issue extends Model
+class Issue extends Model implements \MaddHatter\LaravelFullcalendar\Event
 {
+    use CalendarEventTrait;
+
     const STATUS_NEW        = 1;
     const STATUS_OPEN       = 2;
     const STATUS_HOLD       = 3;
@@ -29,6 +31,7 @@ class Issue extends Model
     const TYPE_PROPOSAL     = 4;
 
     protected $guarded = [];
+    protected $casts = ['date' => 'date'];
 
     use Taggable;
 

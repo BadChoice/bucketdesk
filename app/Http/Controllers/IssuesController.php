@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Issue;
 use App\Repository;
 use BadChoice\Thrust\Controllers\ThrustController;
+use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class IssuesController extends Controller
 {
@@ -43,6 +44,13 @@ class IssuesController extends Controller
     {
         request()->merge(['backlog' => true]);
         return (new ThrustController)->index('issues');
+    }
+
+    public function calendar()
+    {
+        $events = Issue::open()->whereNotNull('date')->get();
+        $calendar = Calendar::addEvents($events);
+        return view('calendar.index', ['calendar' => $calendar]);
     }
 
     public function toggleBacklog(Issue $issue)
