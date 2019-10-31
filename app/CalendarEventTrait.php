@@ -10,7 +10,7 @@ trait CalendarEventTrait
 
     public function getTitle()
     {
-        return $this->title . ": " . $this->user->username ?? "";
+        return $this->title . ": " . optional($this->user)->username ?? "";
     }
 
     public function isAllDay()
