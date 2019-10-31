@@ -24,6 +24,7 @@ use BadChoice\Thrust\ChildResource;
 use BadChoice\Thrust\Fields\BelongsTo;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Gravatar;
+use BadChoice\Thrust\Fields\Edit;
 
 class Issue extends ChildResource
 {
@@ -100,8 +101,7 @@ class Issue extends ChildResource
         ];
     }
 
-    public function canDelete($object)
-    {
-        return false;
+    protected function editAndDeleteFields() {
+        return [Edit::make('edit')];
     }
 }
