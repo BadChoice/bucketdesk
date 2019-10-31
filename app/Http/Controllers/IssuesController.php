@@ -48,9 +48,10 @@ class IssuesController extends Controller
 
     public function calendar()
     {
-        $events = Issue::open()->whereNotNull('date')->get();
+        $events = Issue::workingOn()->whereNotNull('date')->get();
+        $pending = Issue::workingOn()->whereNotNull('date')->where('date', '<', now()->toDateString())->orderBy('date')->get();
         $calendar = Calendar::addEvents($events);
-        return view('calendar.index', ['calendar' => $calendar]);
+        return view('calendar.index', ['calendar' => $calendar, 'pending' => $pending]);
     }
 
     public function toggleBacklog(Issue $issue)
