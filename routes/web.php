@@ -22,7 +22,6 @@ Route::group(['middleware' => ['auth', 'bitbucketOauth']], function() {
     Route::get('me/issues/current', 'MyIssuesController@current')->name('my.issues.current');
     Route::get('me/issues/all', 'MyIssuesController@all')->name('my.issues.all');
     Route::post('issues', 'IssuesController@store')->name('issues.store');
-    Route::get('issues/calendar', 'IssuesController@calendar')->name('issues.calendar');
     Route::get('issues/backlog', 'IssuesController@backlog')->name('issues.backlog');
     Route::get('issues/{issue}', 'IssuesController@show')->name('issues.show');
     Route::get('issues/{issue}/resolve', 'IssuesController@resolve')->name('issues.resolve');
@@ -36,6 +35,7 @@ Route::group(['middleware' => ['auth', 'bitbucketOauth']], function() {
 
     Route::get('tags', 'TagsController@index')->name('tags.index');
 
+    Route::get('calendar', 'IssuesController@calendar')->name('calendar');
     Route::get('trello', 'TrelloController@index')->name('trello');
     Route::put('trello', 'TrelloController@update')->name('trello.update');
 

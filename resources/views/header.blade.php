@@ -23,7 +23,7 @@
             <li class="@if (Route::current()->getName() == 'my.issues.current') active @endif "><a href="{{route('my.issues.current')}}"> @icon(fire) My Current Work</a></li>
             <li class="@if (Route::current()->getName() == 'my.issues.all') active @endif "><a href="{{route('my.issues.all')}}">@icon(list) All My Work</a></li>
             <li class="@if (Route::current()->getName() == 'trello') active @endif "><a href="{{route('trello')}}"> @icon(road) Trello</a></li>
-            <li class="@if (Route::current()->getName() == 'calendar') active @endif "><a href="{{route('issues.calendar')}}"> @icon(calendar) Calendar</a></li>
+            <li class="@if (Route::current()->getName() == 'calendar') active @endif "><a href="{{route('calendar')}}"> @icon(calendar) Calendar</a></li>
             <li class="@if (Route::current()->getName() == 'issues.backlog') active @endif "><a href="{{route('issues.backlog')}}">@icon(bed) Backlog</a></li>
             <li class="@if (Route::current()->getName() == 'reports') active @endif "><a href="{{route('reports')}}">@icon(bar-chart) Reports </a></li>
         </ul>

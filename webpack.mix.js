@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 mix.babel([
         'vendor/badchoice/thrust/src/resources/js/thrust.min.js',
         'resources/js/admin.js',
+        'resources/js/quickActions.js',
         'resources/js/jquery.tagsinput.min.js',  //http://xoxco.com/projects/code/tagsinput/
     ], 'public/js/app.js')
     .babel([
