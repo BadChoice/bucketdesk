@@ -52,6 +52,7 @@ class IssuesController extends Controller
         $pending = Issue::workingOn()->whereNotNull('date')->where('date', '<', now()->toDateString())->orderBy('date')->get();
         $calendar = Calendar::addEvents($events)->setOptions([ //set fullcalendar options
             'editable' => true,
+            'firstDay' => 1,
         ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
             'eventClick' => 'function(info) {showIssue(info)}',
             'eventDrop' => 'function(info) {updateDate(info)}',
