@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Issue;
+use App\IssueTrackers\Bitbucket\Bitbucket;
 use App\Repository;
 use Carbon\Carbon;
 
@@ -19,7 +20,7 @@ class IssuesController extends Controller
 
     public function show($repo, $issue)
     {
-        return response(Issue::findWith($repo, $issue));
+        return response(Issue::findWith($repo, $issue)->load('repository'));
     }
 
     public function update($repo, $issue){
@@ -28,7 +29,12 @@ class IssuesController extends Controller
 
     public function createPullRequest($repo, $issue){
         $issue = Issue::findWith($repo, $issue);
-
+        if ($issue->pull_request) {
+            return response("This issue already has a pr: {$issue->pull_request}");
+        }
+        $pr = app(Bitbucket::class)->createPullRequest($issue->repository->account, $issue->repository->repo, $issue->title, "feature/issue-{$issue->issue_id}", "dev");
+        $issue->ignoreBitbucketUpdate()->update(["pull_request" => $pr->links->html->href]);
+        return response($pr->links->html->href);
     }
 
 }

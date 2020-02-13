@@ -90,8 +90,10 @@ class Bitbucket
     public function parseResponse($response)
     {
         $response = json_decode($response->getContent());
-        //dd($response);
         if (isset($response->type) && $response->type == 'error'){
+            if (!isset($response->fields)){
+                throw new IssueTrackerException($response->error->message);
+            }
            throw new IssueTrackerException($response->error->message . ':' . collect($response->error->fields)->map(function($value, $key){
                 return $key . " => " . $value;
            })->implode("\n"));
@@ -147,17 +149,11 @@ class Bitbucket
                 "state" => "OPEN",
                 "open" =>  true,
                 "closed" => false,
-                "fromRef" => [
-                    "id" => "refs/heads/$fromBranch",
-                    "repository" => [
-                        "slug" => "$account/$repoSlug",
-                    ]
+                "source" => [
+                    "branch" => ["name" => "$fromBranch"]
                 ],
-                "toRef" => [
-                    "id" => "refs/heads/$toBranch",
-                    "repository" => [
-                        "slug" => "$account/$repoSlug",
-                    ]
+                "destination" => [
+                    "branch" => ["name" => $toBranch]
                 ],
                 "locked" => false,
             ])

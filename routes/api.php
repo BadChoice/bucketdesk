@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('issues','Api\IssuesController@index');
 Route::get('issues/{repo}/{issue}','Api\IssuesController@show');
+Route::put('issues/{repo}/{issue}','Api\IssuesController@update');
+Route::post('issues/{repo}/{issue}/pr','Api\IssuesController@createPullRequest');
