@@ -17,7 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('issues','Api\IssuesController@index');
-Route::get('issues/{repo}/{issue}','Api\IssuesController@show');
-Route::put('issues/{repo}/{issue}','Api\IssuesController@update');
-Route::post('issues/{repo}/{issue}/pr','Api\IssuesController@createPullRequest');
+Route::group(["middleware" => 'apiToken', "namespace" => 'Api'], function(){
+    Route::get('issues','IssuesController@index');
+    Route::get('issues/{repo}/{issue}','IssuesController@show');
+    Route::put('issues/{repo}/{issue}','IssuesController@update');
+    Route::post('issues/{repo}/{issue}/pr','IssuesController@createPullRequest');
+});

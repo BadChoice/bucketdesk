@@ -30,11 +30,11 @@ class IssuesController extends Controller
     public function createPullRequest($repo, $issue){
         $issue = Issue::findWith($repo, $issue);
         if ($issue->pull_request) {
-            return response("This issue already has a pr: {$issue->pull_request}");
+            return response(["link" => $issue->pull_request]);
         }
         $pr = app(Bitbucket::class)->createPullRequest($issue->repository->account, $issue->repository->repo, $issue->title, "feature/issue-{$issue->issue_id}", "dev");
         $issue->ignoreBitbucketUpdate()->update(["pull_request" => $pr->links->html->href]);
-        return response($pr->links->html->href);
+        return response(["link" => $issue->pull_request]);
     }
 
 }
