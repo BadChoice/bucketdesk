@@ -16,6 +16,7 @@ use App\ThrustHelpers\Fields\Tags;
 use App\ThrustHelpers\Fields\TitleField;
 use App\ThrustHelpers\Fields\TypeField;
 use App\ThrustHelpers\Filters\PriorityFilter;
+use App\ThrustHelpers\Filters\ReadyFilter;
 use App\ThrustHelpers\Filters\RepositoryFilter;
 use App\ThrustHelpers\Filters\StatusFilter;
 use App\ThrustHelpers\Filters\TypeFilter;
@@ -98,6 +99,7 @@ class Issue extends ChildResource
             new StatusFilter,
             new RepositoryFilter,
             new UserFilter,
+            new ReadyFilter,
         ];
     }
 
