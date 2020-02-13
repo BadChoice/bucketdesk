@@ -24,6 +24,8 @@ class CreateIssuesTable extends Migration
             $table->date('date')->nullable();
             $table->integer('order')->unsigned()->default(0);
 
+            $table->string('pull_request')->nullable();
+
             $table->boolean('backlog')->default(0);
 
             $table->timestamps();

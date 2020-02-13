@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('issues','Api\IssuesController@index');
+Route::get('issues/{repo}/{issue}','Api\IssuesController@show');

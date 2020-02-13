@@ -9,6 +9,7 @@ use Bitbucket\API\Groups;
 use Bitbucket\API\Http\Listener\OAuth2Listener;
 use Bitbucket\API\Repositories\Hooks;
 use Bitbucket\API\Repositories\Issues;
+use Bitbucket\API\Repositories\PullRequests;
 
 class Bitbucket
 {
@@ -132,6 +133,34 @@ class Bitbucket
 
         return $this->parseResponse(
             $groups->get($account)
+        );
+    }
+
+    public function createPullRequest($account, $repoSlug, $title, $fromBranch, $toBranch)
+    {
+        $pr = new PullRequests();
+        $this->setAuth($pr);
+        return $this->parseResponse(
+            $pr->create($account, $repoSlug, [
+                "title" => $title,
+                "description" => $title,
+                "state" => "OPEN",
+                "open" =>  true,
+                "closed" => false,
+                "fromRef" => [
+                    "id" => "refs/heads/$fromBranch",
+                    "repository" => [
+                        "slug" => "$account/$repoSlug",
+                    ]
+                ],
+                "toRef" => [
+                    "id" => "refs/heads/$toBranch",
+                    "repository" => [
+                        "slug" => "$account/$repoSlug",
+                    ]
+                ],
+                "locked" => false,
+            ])
         );
     }
 

@@ -38,6 +38,11 @@ class Issue extends Model implements \MaddHatter\LaravelFullcalendar\Identifiabl
     protected $shouldIgnoreBitbucketUpdate = false;
     private $presenter;
 
+    public static function findWith($repo, $id){
+        $repository = Repository::where('name', $repo)->orWhere('repo', $repo)->firstOrFail();
+        return Issue::where(['issue_id' => $id, "repository_id" => $repository->id])->firstOrFail();
+    }
+
     public static function fromBitbucketIssue($repository, $issue)
     {
         return Issue::updateOrCreate([
