@@ -10,6 +10,9 @@
     <span class="tag">{!! $issue->presenter()->status !!}</span>
     <span class="tag">{{ $issue->repository->name }}</span>
     {!! $issue->presenter()->tags !!}
+    @if ($issue->pull_request)
+        <br><a href="{{$issue->pull_request}}">{{ $issue->pull_request }}</a>
+    @endif
 </div>
 @include('components.comment', [
     'avatar' => $remote->reporter->links->avatar->href,
