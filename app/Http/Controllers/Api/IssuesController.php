@@ -16,7 +16,7 @@ class IssuesController extends Controller
     {
         $query = Issue::query();
         if (request()->has('user')){
-           $query = $query->where('username', 'like', request()->user);
+           $query = $query->where('username', 'like', "%".request()->user."%");
         }
         $issues = $query->workingOn()->with('repository')->orderBy('order', 'asc')->orderBy('repository_id', 'asc')->take(25)->get();
         return response($issues);
