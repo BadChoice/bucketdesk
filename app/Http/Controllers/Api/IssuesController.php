@@ -14,8 +14,12 @@ class IssuesController extends Controller
 {
     public function index()
     {
-        $topIssues = Issue::workingOn()->with('repository')->orderBy('order', 'asc')->orderBy('repository_id', 'asc')->where('date', '<', Carbon::tomorrow())->get();
-        return response($topIssues);
+        $query = Issue::query();
+        if (request()->has('user')){
+           $query = $query->where('username', 'like', request()->user);
+        }
+        $issues = $query->workingOn()->with('repository')->orderBy('order', 'asc')->orderBy('repository_id', 'asc')->get();
+        return response($issues);
     }
 
     public function show($repo, $issue)
