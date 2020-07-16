@@ -17,7 +17,7 @@
         "laravel-mix": "^4.1.2",
         "less": "^3.8.1",
         "less-loader": "^4.1.0",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "popper.js": "^1.12",
         "vue": "^2.5.17"
     }
